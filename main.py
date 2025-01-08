@@ -23,8 +23,7 @@ if len(st.session_state.hidden_buttons) == len(button_ids):
     )
     # 리셋 버튼
     if st.button("버튼 돌려주기"):
-        st.session_state.hidden_buttons.clear()  # 모든 버튼 초기화
-        st.experimental_rerun()  # 페이지 새로고침
+        st.session_state.hidden_buttons = set()  # 모든 버튼 초기화
 else:
     # 랜덤 배치를 위해 컨테이너 생성
     container = st.container()
