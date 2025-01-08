@@ -1,9 +1,28 @@
 import streamlit as st
 import random
 
-# 초기화: 눌린 버튼 상태를 관리하기 위한 session_state
+# 초기화: 눌린 버튼 상태와 배경색 관리
 if "hidden_buttons" not in st.session_state:
     st.session_state.hidden_buttons = set()  # 눌린 버튼의 ID를 저장
+if "bg_color" not in st.session_state:
+    st.session_state.bg_color = "#FFFFFF"  # 초기 배경색 (흰색)
+
+# 배경색 업데이트 함수
+def update_background_color():
+    # 랜덤 색상을 생성
+    st.session_state.bg_color = f"#{random.randint(0, 0xFFFFFF):06x}"
+
+# CSS로 배경색 적용
+st.markdown(
+    f"""
+    <style>
+        body {{
+            background-color: {st.session_state.bg_color};
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 # 제목
 st.title("의미없는 버튼들")
@@ -39,3 +58,4 @@ else:
                 if col.button(f"버튼 {button_id}"):
                     st.write("그냥 버튼이다 뭐")
                     st.session_state.hidden_buttons.add(button_id)  # 버튼 숨기기
+                    update_background_color()  # 배경색 업데이트
