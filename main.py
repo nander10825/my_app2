@@ -5,6 +5,18 @@ import random
 if "hidden_buttons" not in st.session_state:
     st.session_state.hidden_buttons = set()  # 눌린 버튼의 ID를 저장
 
+# 재미있는 메시지 목록
+funny_messages = [
+    "왜 누르시죠? 😂",
+    "버튼 눌렀다! 🎉",
+    "그냥 버튼이다 뭐 🤷‍♂️",
+    "어디서 본 것 같지만... 👀",
+    "버튼이 줄어들고 있어... 😢",
+    "이 버튼은 아주 특별해! 😎",
+    "그거 아세요? 버튼의 위치는 계속 변해요! 👍",
+    "무언가 미묘하게 변했나요? 👀",
+]
+
 # 제목
 st.title("의미없는 버튼들")
 
@@ -37,5 +49,7 @@ else:
                 cols = st.columns(random.randint(1, 5))  # 랜덤한 컬럼 개수
                 col = random.choice(cols)  # 랜덤한 컬럼 선택
                 if col.button(f"버튼 {button_id}"):
-                    st.write("그냥 버튼이다 뭐")
+                    # 눌렸을 때 소소한 재미 메시지
+                    random_message = random.choice(funny_messages)
+                    st.write(random_message)
                     st.session_state.hidden_buttons.add(button_id)  # 버튼 숨기기
