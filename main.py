@@ -1,6 +1,5 @@
 import streamlit as st
 import random
-import time
 
 # 초기화: 눌린 버튼 상태를 관리하기 위한 session_state
 if "hidden_buttons" not in st.session_state:
@@ -24,14 +23,6 @@ st.title("의미없는 버튼들")
 # 버튼 ID 목록
 button_ids = list(range(1, 11))  # 버튼 ID (1부터 10까지)
 
-# 화면 배경색을 랜덤으로 변경하는 함수
-def random_background():
-    colors = ["#FFDDC1", "#C1E1FF", "#FFABAB", "#C1FFC1", "#FFFACD", "#FFB6C1"]
-    return random.choice(colors)
-
-# 화면 배경색을 설정
-st.markdown(f"<style>body{{background-color:{random_background()};}}</style>", unsafe_allow_html=True)
-
 # 모든 버튼이 눌린 경우 메시지와 리셋 버튼 표시
 if len(st.session_state.hidden_buttons) == len(button_ids):
     st.markdown(
@@ -45,7 +36,6 @@ if len(st.session_state.hidden_buttons) == len(button_ids):
     # 리셋 버튼
     if st.button("버튼 돌려주기"):
         st.session_state.hidden_buttons = set()  # 모든 버튼 초기화
-        st.experimental_rerun()  # 페이지 새로고침
 else:
     # 랜덤 배치를 위해 컨테이너 생성
     container = st.container()
@@ -62,6 +52,4 @@ else:
                     # 눌렸을 때 소소한 재미 메시지
                     random_message = random.choice(funny_messages)
                     st.write(random_message)
-                    # 배경색을 바꿔보세요
-                    st.markdown(f"<style>body{{background-color:{random_background()};}}</style>", unsafe_allow_html=True)
                     st.session_state.hidden_buttons.add(button_id)  # 버튼 숨기기
