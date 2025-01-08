@@ -1,14 +1,21 @@
 import streamlit as st
-import random
 
-st.title("앱 만들거임")
-st.text("\n\n")
-st.write(" 난 신이다 🪽")
-st.write("내 주소? 알아서 뭐하게!끄져!")
+st.title("의미없는 버튼들")
 
-st.button("리셋", type="primary")
+# 버튼
 if st.button("버튼"):
     st.write("그냥 버튼이다 뭐")
-else:
-    st.write(" ")
+
+if st.button("버튼"):
+    st.write("그냥 버튼이다 뭐")
+
+if st.button("버튼"):
+    st.write("그냥 버튼이다 뭐")
+
+if st.button("버튼"):
+    st.write("그냥 버튼이다 뭐")
+
+if st.button("버튼"):
+    st.write("그냥 버튼이다 뭐")
+
 
