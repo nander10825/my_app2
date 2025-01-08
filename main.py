@@ -11,7 +11,7 @@ st.title("의미없는 버튼들")
 # 버튼 ID 목록
 button_ids = list(range(1, 11))  # 버튼 ID (1부터 10까지)
 
-# 모든 버튼이 눌린 경우 메시지 표시
+# 모든 버튼이 눌린 경우 메시지와 리셋 버튼 표시
 if len(st.session_state.hidden_buttons) == len(button_ids):
     st.markdown(
         """
@@ -21,6 +21,10 @@ if len(st.session_state.hidden_buttons) == len(button_ids):
         """,
         unsafe_allow_html=True,
     )
+    # 리셋 버튼
+    if st.button("버튼 돌려주기"):
+        st.session_state.hidden_buttons.clear()  # 모든 버튼 초기화
+        st.experimental_rerun()  # 페이지 새로고침
 else:
     # 랜덤 배치를 위해 컨테이너 생성
     container = st.container()
