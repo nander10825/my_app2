@@ -8,18 +8,31 @@ if "hidden_buttons" not in st.session_state:
 # 제목
 st.title("의미없는 버튼들")
 
-# 버튼 고정 순서 (1부터 10까지)
-button_ids = list(range(1, 11))
+# 버튼 ID 목록
+button_ids = list(range(1, 11))  # 버튼 ID (1부터 10까지)
 
-# 랜덤 배치를 위해 컨테이너 생성
-container = st.container()
+# 모든 버튼이 눌린 경우 메시지 표시
+if len(st.session_state.hidden_buttons) == len(button_ids):
+    st.markdown(
+        """
+        <div style='text-align: center; margin-top: 200px;'>
+            <h1 style='font-size: 60px; color: gray;'>이런 내 버튼들...</h1>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+else:
+    # 랜덤 배치를 위해 컨테이너 생성
+    container = st.container()
 
-# 버튼 생성 및 랜덤 배치
-with container:
-    for button_id in button_ids:
-        if button_id not in st.session_state.hidden_buttons:  # 숨겨진 버튼 제외
-            cols = st.columns(random.randint(1, 5))  # 랜덤한 컬럼 개수
-            col = random.choice(cols)  # 랜덤한 컬럼 선택
-            if col.button(f"버튼 {button_id}"):
-                st.write("그냥 버튼이다 뭐")
-                st.session_state.hidden_buttons.add(button_id)  # 버튼 숨기기
+    # 랜덤 배치 및 버튼 생성
+    random.shuffle(button_ids)  # 랜덤 순서로 섞기
+
+    with container:
+        for button_id in button_ids:
+            if button_id not in st.session_state.hidden_buttons:  # 숨겨진 버튼 제외
+                cols = st.columns(random.randint(1, 5))  # 랜덤한 컬럼 개수
+                col = random.choice(cols)  # 랜덤한 컬럼 선택
+                if col.button(f"버튼 {button_id}"):
+                    st.write("그냥 버튼이다 뭐")
+                    st.session_state.hidden_buttons.add(button_id)  # 버튼 숨기기
