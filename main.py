@@ -8,13 +8,13 @@ if "hidden_buttons" not in st.session_state:
 # 제목
 st.title("의미없는 버튼들")
 
+# 버튼 고정 순서 (1부터 10까지)
+button_ids = list(range(1, 11))
+
 # 랜덤 배치를 위해 컨테이너 생성
 container = st.container()
 
 # 버튼 생성 및 랜덤 배치
-button_ids = list(range(1, 11))  # 버튼 ID (1부터 10까지)
-random.shuffle(button_ids)  # 랜덤 순서로 섞기
-
 with container:
     for button_id in button_ids:
         if button_id not in st.session_state.hidden_buttons:  # 숨겨진 버튼 제외
